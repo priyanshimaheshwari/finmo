@@ -24,6 +24,7 @@ import {
   clearSelectedProduct,
 } from "../redux/slices/productSlice";
 import { addToCart } from "../redux/slices/cartSlice";
+import { toast } from "react-toastify"; // Import toast
 
 const ProductDetailPage = () => {
   const { id } = useParams();
@@ -45,6 +46,15 @@ const ProductDetailPage = () => {
   const handleAddToCart = () => {
     if (selectedProduct) {
       dispatch(addToCart(selectedProduct));
+      toast.success(`${selectedProduct.title} added to cart!`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 

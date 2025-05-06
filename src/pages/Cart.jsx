@@ -22,6 +22,7 @@ import {
   updateQuantity,
   clearCart,
 } from "../redux/slices/cartSlice";
+import { toast } from "react-toastify"; // Import the toast
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -31,15 +32,18 @@ const Cart = () => {
 
   const handleRemoveItem = (id) => {
     dispatch(removeFromCart(id));
+    toast.success("Item removed from cart!"); // Toast notification for item removal
   };
 
   const handleUpdateQuantity = (id, quantity) => {
     if (quantity < 1) return;
     dispatch(updateQuantity({ id, quantity }));
+    toast.info(`Quantity updated to ${quantity}`); // Toast notification for quantity update
   };
 
   const handleClearCart = () => {
     dispatch(clearCart());
+    toast.error("Cart has been cleared!"); // Toast notification for clearing cart
   };
 
   return (
@@ -66,7 +70,9 @@ const Cart = () => {
             sx={{
               mt: 2,
               background: "linear-gradient(45deg, #ff6f61, #ff9e80)",
-              "&:hover": { background: "linear-gradient(45deg, #ff9e80, #ff6f61)" },
+              "&:hover": {
+                background: "linear-gradient(45deg, #ff9e80, #ff6f61)",
+              },
             }}
           >
             Continue Shopping
@@ -78,7 +84,15 @@ const Cart = () => {
             <Grid item xs={12} md={8}>
               <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
                 {items.map((item) => (
-                  <Box key={item.id} sx={{ mb: 2, p: 2, borderRadius: 2, backgroundColor: "#f9f9f9" }}>
+                  <Box
+                    key={item.id}
+                    sx={{
+                      mb: 2,
+                      p: 2,
+                      borderRadius: 2,
+                      backgroundColor: "#f9f9f9",
+                    }}
+                  >
                     <Grid container spacing={2} alignItems="center">
                       <Grid item xs={3} sm={2}>
                         <Box
@@ -114,7 +128,10 @@ const Cart = () => {
                             textDecoration: "none",
                             color: "inherit",
                             fontWeight: "bold",
-                            "&:hover": { color: "primary.main", textDecoration: "underline" },
+                            "&:hover": {
+                              color: "primary.main",
+                              textDecoration: "underline",
+                            },
                           }}
                         >
                           {item.title}
@@ -273,8 +290,7 @@ const Cart = () => {
                 </Button>
 
                 <Alert severity="info" sx={{ mt: 2 }}>
-                  This is a demo application. Checkout functionality is not
-                  implemented.
+                  This is a sample cart. Prices and items are for demonstration purposes only.
                 </Alert>
               </Paper>
             </Grid>

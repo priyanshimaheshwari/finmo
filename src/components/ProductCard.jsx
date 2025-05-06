@@ -1,23 +1,24 @@
 "use client";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Button,
-  CardActions,
-  Rating,
-  Box,
-} from "@mui/material";
+import { Card, CardContent, CardMedia, Typography, Button, CardActions, Rating, Box } from "@mui/material";
 import { addToCart } from "../redux/slices/cartSlice";
+import { toast } from "react-toastify"; // Import toast
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    dispatch(addToCart(product));
+    dispatch(addToCart(product)); // Dispatch the addToCart action
+    toast.success(`${product.title} added to cart!`, {
+      position: "top-right", // Toast position
+      autoClose: 3000, // Auto close after 3 seconds
+      hideProgressBar: false, // Show progress bar
+      closeOnClick: true, // Close on click
+      pauseOnHover: true, // Pause on hover
+      draggable: true, // Enable drag
+      progress: undefined, // Optional: Can be used for showing progress
+    });
   };
 
   return (
