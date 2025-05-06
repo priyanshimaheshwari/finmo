@@ -30,7 +30,7 @@ const LoginPage = () => {
   const { error, isAuthenticated } = useSelector((state) => state.auth);
 
   React.useEffect(() => {
-    // Clear any previous errors
+    
     dispatch(clearError());
 
     // If already authenticated, redirect to products
@@ -53,13 +53,19 @@ const LoginPage = () => {
 
   return (
     <Container maxWidth="sm">
-      <Paper elevation={3} sx={{ p: 4, mt: 8 }}>
-        <Typography variant="h4" component="h1" gutterBottom align="center">
+      <Paper elevation={6} sx={{ p: 5, mt: 8, borderRadius: 3 }}>
+        <Typography
+          variant="h4"
+          component="h1"
+          gutterBottom
+          align="center"
+          sx={{ fontWeight: "bold", color: "#3f51b5" }}
+        >
           Login
         </Typography>
 
         {error && (
-          <Alert severity="error" sx={{ mb: 2 }}>
+          <Alert severity="error" sx={{ mb: 2, borderRadius: 2 }}>
             {error}
           </Alert>
         )}
@@ -82,6 +88,11 @@ const LoginPage = () => {
                 margin="normal"
                 error={touched.email && Boolean(errors.email)}
                 helperText={touched.email && errors.email}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 2,
+                  },
+                }}
               />
 
               <Field
@@ -93,6 +104,11 @@ const LoginPage = () => {
                 margin="normal"
                 error={touched.password && Boolean(errors.password)}
                 helperText={touched.password && errors.password}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: 2,
+                  },
+                }}
               />
 
               <Button
@@ -101,14 +117,27 @@ const LoginPage = () => {
                 color="primary"
                 fullWidth
                 disabled={isSubmitting}
-                sx={{ mt: 3 }}
+                sx={{
+                  mt: 3,
+                  padding: 1.5,
+                  borderRadius: 2,
+                  "&:hover": {
+                    backgroundColor: "#303f9f",
+                  },
+                }}
               >
                 Login
               </Button>
 
               <Box mt={2} textAlign="center">
                 <Typography variant="body2">
-                  Don't have an account? <Link to="/signup">Sign Up</Link>
+                  Don't have an account?{" "}
+                  <Link
+                    to="/signup"
+                    style={{ color: "#3f51b5", fontWeight: "bold" }}
+                  >
+                    Sign Up
+                  </Link>
                 </Typography>
               </Box>
             </Form>

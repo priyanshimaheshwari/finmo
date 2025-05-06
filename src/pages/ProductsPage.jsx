@@ -26,7 +26,7 @@ import {
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
-  const { products, filteredProducts, categories, status, error } = useSelector(
+  const {  filteredProducts, categories, status, error } = useSelector(
     (state) => state.products
   );
   const [searchTerm, setSearchTerm] = useState("");

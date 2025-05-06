@@ -26,10 +26,13 @@ const ProductCard = ({ product }) => {
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        transition: "0.3s",
+        borderRadius: 3,
+        overflow: "hidden",
+        background: "#fff",
+        transition: "transform 0.3s ease, box-shadow 0.3s ease",
         "&:hover": {
-          transform: "translateY(-5px)",
-          boxShadow: 3,
+          transform: "translateY(-6px)",
+          boxShadow: 6,
         },
       }}
     >
@@ -38,10 +41,16 @@ const ProductCard = ({ product }) => {
         height="200"
         image={product.image}
         alt={product.title}
-        sx={{ objectFit: "contain", p: 2 }}
+        sx={{ objectFit: "contain", p: 2, backgroundColor: "#f9f9f9" }}
       />
-      <CardContent sx={{ flexGrow: 1 }}>
-        <Typography gutterBottom variant="h6" component="div" noWrap>
+      <CardContent sx={{ flexGrow: 1, px: 3 }}>
+        <Typography
+          gutterBottom
+          variant="h6"
+          component="div"
+          noWrap
+          sx={{ fontWeight: 600 }}
+        >
           {product.title}
         </Typography>
         <Typography
@@ -53,11 +62,13 @@ const ProductCard = ({ product }) => {
             display: "-webkit-box",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
+            mb: 1,
           }}
         >
           {product.description}
         </Typography>
-        <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
+
+        <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
           <Rating
             value={product.rating.rate}
             precision={0.5}
@@ -68,20 +79,57 @@ const ProductCard = ({ product }) => {
             ({product.rating.count})
           </Typography>
         </Box>
-        <Typography variant="h6" color="primary" sx={{ mt: 1 }}>
+
+        <Typography
+          variant="h6"
+          sx={{
+            color: "#2e7d32",
+            mt: 1,
+            fontWeight: 700,
+            letterSpacing: "0.5px",
+          }}
+        >
           ${product.price.toFixed(2)}
         </Typography>
       </CardContent>
-      <CardActions>
+
+      <CardActions sx={{ justifyContent: "space-between", px: 2, pb: 2 }}>
         <Button
-          size="small"
-          color="primary"
           component={Link}
           to={`/products/${product.id}`}
+          size="small"
+          variant="outlined"
+          sx={{
+            borderRadius: "20px",
+            fontWeight: 500,
+            textTransform: "none",
+            borderColor: "#2196f3",
+            color: "#2196f3",
+            "&:hover": {
+              backgroundColor: "#e3f2fd",
+              borderColor: "#1976d2",
+              color: "#1976d2",
+            },
+          }}
         >
           View Details
         </Button>
-        <Button size="small" color="primary" onClick={handleAddToCart}>
+
+        <Button
+          size="small"
+          variant="contained"
+          onClick={handleAddToCart}
+          sx={{
+            borderRadius: "20px",
+            textTransform: "none",
+            backgroundColor: "#ff9800",
+            color: "#fff",
+            fontWeight: 600,
+            "&:hover": {
+              backgroundColor: "#fb8c00",
+            },
+          }}
+        >
           Add to Cart
         </Button>
       </CardActions>

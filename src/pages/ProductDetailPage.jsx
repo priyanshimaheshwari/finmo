@@ -71,7 +71,14 @@ const ProductDetailPage = () => {
         <Button
           startIcon={<ArrowBackIcon />}
           onClick={handleGoBack}
-          sx={{ mt: 2 }}
+          sx={{
+            mt: 2,
+            backgroundColor: "primary.main",
+            color: "white",
+            "&:hover": {
+              backgroundColor: "primary.dark",
+            },
+          }}
         >
           Back to Products
         </Button>
@@ -88,7 +95,14 @@ const ProductDetailPage = () => {
         <Button
           startIcon={<ArrowBackIcon />}
           onClick={handleGoBack}
-          sx={{ mt: 2 }}
+          sx={{
+            mt: 2,
+            backgroundColor: "primary.main",
+            color: "white",
+            "&:hover": {
+              backgroundColor: "primary.dark",
+            },
+          }}
         >
           Back to Products
         </Button>
@@ -112,7 +126,7 @@ const ProductDetailPage = () => {
         <Typography color="text.primary">{selectedProduct.title}</Typography>
       </Breadcrumbs>
 
-      <Paper elevation={2} sx={{ p: 3 }}>
+      <Paper elevation={5} sx={{ p: 3, borderRadius: 2, boxShadow: 6 }}>
         <Grid container spacing={4}>
           <Grid item xs={12} md={5}>
             <Box
@@ -123,7 +137,13 @@ const ProductDetailPage = () => {
                 alignItems: "center",
                 bgcolor: "white",
                 p: 2,
-                borderRadius: 1,
+                borderRadius: 2,
+                boxShadow: 4,
+                transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  boxShadow: 12,
+                },
               }}
             >
               <img
@@ -133,13 +153,24 @@ const ProductDetailPage = () => {
                   maxWidth: "100%",
                   maxHeight: "100%",
                   objectFit: "contain",
+                  transition: "transform 0.3s ease",
                 }}
               />
             </Box>
           </Grid>
 
           <Grid item xs={12} md={7}>
-            <Typography variant="h4" component="h1" gutterBottom>
+            <Typography
+              variant="h3"
+              component="h1"
+              gutterBottom
+              sx={{
+                fontWeight: "bold",
+                color: "text.primary",
+                transition: "color 0.3s ease",
+                "&:hover": { color: "primary.main" },
+              }}
+            >
               {selectedProduct.title}
             </Typography>
 
@@ -148,6 +179,11 @@ const ProductDetailPage = () => {
                 value={selectedProduct.rating.rate}
                 precision={0.5}
                 readOnly
+                sx={{
+                  "& .MuiRating-iconFilled": {
+                    color: "primary.main",
+                  },
+                }}
               />
               <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
                 ({selectedProduct.rating.count} reviews)
@@ -177,12 +213,31 @@ const ProductDetailPage = () => {
                 size="large"
                 startIcon={<ShoppingCartIcon />}
                 onClick={handleAddToCart}
-                sx={{ mr: 2 }}
+                sx={{
+                  mr: 2,
+                  backgroundColor: "primary.main",
+                  "&:hover": {
+                    backgroundColor: "primary.dark",
+                    transform: "scale(1.05)",
+                    boxShadow: 4,
+                  },
+                }}
               >
                 Add to Cart
               </Button>
 
-              <Button variant="outlined" onClick={handleGoBack}>
+              <Button
+                variant="outlined"
+                onClick={handleGoBack}
+                sx={{
+                  borderColor: "primary.main",
+                  color: "primary.main",
+                  "&:hover": {
+                    backgroundColor: "primary.main",
+                    color: "white",
+                  },
+                }}
+              >
                 Back to Products
               </Button>
             </Box>

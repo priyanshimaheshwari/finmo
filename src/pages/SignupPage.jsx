@@ -73,13 +73,19 @@ const SignupPage = () => {
 
   return (
     <Container maxWidth="sm">
-      <Paper elevation={3} sx={{ p: 4, mt: 8 }}>
-        <Typography variant="h4" component="h1" gutterBottom align="center">
+      <Paper elevation={6} sx={{ p: 5, mt: 8, borderRadius: 3 }}>
+        <Typography
+          variant="h4"
+          component="h1"
+          gutterBottom
+          align="center"
+          sx={{ fontWeight: "bold", color: "#3f51b5" }}
+        >
           Sign Up
         </Typography>
 
         {error && (
-          <Alert severity="error" sx={{ mb: 2 }}>
+          <Alert severity="error" sx={{ mb: 2, borderRadius: 2 }}>
             {error}
           </Alert>
         )}
@@ -97,7 +103,7 @@ const SignupPage = () => {
         >
           {({ errors, touched, isSubmitting }) => (
             <Form>
-              <Grid container spacing={2}>
+              <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
                   <Field
                     as={TextField}
@@ -106,6 +112,11 @@ const SignupPage = () => {
                     fullWidth
                     error={touched.firstName && Boolean(errors.firstName)}
                     helperText={touched.firstName && errors.firstName}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                      },
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -116,6 +127,11 @@ const SignupPage = () => {
                     fullWidth
                     error={touched.lastName && Boolean(errors.lastName)}
                     helperText={touched.lastName && errors.lastName}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                      },
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -126,6 +142,11 @@ const SignupPage = () => {
                     fullWidth
                     error={touched.email && Boolean(errors.email)}
                     helperText={touched.email && errors.email}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                      },
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -137,6 +158,11 @@ const SignupPage = () => {
                     fullWidth
                     error={touched.password && Boolean(errors.password)}
                     helperText={touched.password && errors.password}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                      },
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -146,12 +172,13 @@ const SignupPage = () => {
                     label="Confirm Password"
                     type="password"
                     fullWidth
-                    error={
-                      touched.confirmPassword && Boolean(errors.confirmPassword)
-                    }
-                    helperText={
-                      touched.confirmPassword && errors.confirmPassword
-                    }
+                    error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+                    helperText={touched.confirmPassword && errors.confirmPassword}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: 2,
+                      },
+                    }}
                   />
                 </Grid>
               </Grid>
@@ -162,14 +189,24 @@ const SignupPage = () => {
                 color="primary"
                 fullWidth
                 disabled={isSubmitting}
-                sx={{ mt: 3 }}
+                sx={{
+                  mt: 3,
+                  padding: 1.5,
+                  borderRadius: 2,
+                  "&:hover": {
+                    backgroundColor: "#303f9f",
+                  },
+                }}
               >
                 Sign Up
               </Button>
 
               <Box mt={2} textAlign="center">
                 <Typography variant="body2">
-                  Already have an account? <Link to="/login">Login</Link>
+                  Already have an account?{" "}
+                  <Link to="/login" style={{ color: "#3f51b5", fontWeight: "bold" }}>
+                    Login
+                  </Link>
                 </Typography>
               </Box>
             </Form>

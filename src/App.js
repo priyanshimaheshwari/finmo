@@ -4,7 +4,7 @@ import { ThemeProvider, CssBaseline } from "@mui/material"
 import { store } from "./redux/store"
 import theme from "./theme"
 
-// Pages
+
 import SignupPage from "./pages/SignupPage"
 import LoginPage from "./pages/LoginPage"
 import ProductsPage from "./pages/ProductsPage"

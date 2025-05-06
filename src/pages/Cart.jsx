@@ -49,7 +49,7 @@ const Cart = () => {
       </Typography>
 
       {items.length === 0 ? (
-        <Paper elevation={2} sx={{ p: 4, textAlign: "center" }}>
+        <Paper elevation={3} sx={{ p: 4, textAlign: "center", borderRadius: 2 }}>
           <ShoppingCartIcon
             sx={{ fontSize: 60, color: "text.secondary", mb: 2 }}
           />
@@ -63,7 +63,11 @@ const Cart = () => {
             variant="contained"
             component={Link}
             to="/products"
-            sx={{ mt: 2 }}
+            sx={{
+              mt: 2,
+              background: "linear-gradient(45deg, #ff6f61, #ff9e80)",
+              "&:hover": { background: "linear-gradient(45deg, #ff9e80, #ff6f61)" },
+            }}
           >
             Continue Shopping
           </Button>
@@ -72,9 +76,9 @@ const Cart = () => {
         <>
           <Grid container spacing={3}>
             <Grid item xs={12} md={8}>
-              <Paper elevation={2} sx={{ p: 2 }}>
+              <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
                 {items.map((item) => (
-                  <Box key={item.id} sx={{ mb: 2 }}>
+                  <Box key={item.id} sx={{ mb: 2, p: 2, borderRadius: 2, backgroundColor: "#f9f9f9" }}>
                     <Grid container spacing={2} alignItems="center">
                       <Grid item xs={3} sm={2}>
                         <Box
@@ -83,9 +87,10 @@ const Cart = () => {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
-                            bgcolor: "white",
+                            backgroundColor: "#fff",
                             p: 1,
                             borderRadius: 1,
+                            boxShadow: 2,
                           }}
                         >
                           <img
@@ -108,7 +113,8 @@ const Cart = () => {
                           sx={{
                             textDecoration: "none",
                             color: "inherit",
-                            "&:hover": { color: "primary.main" },
+                            fontWeight: "bold",
+                            "&:hover": { color: "primary.main", textDecoration: "underline" },
                           }}
                         >
                           {item.title}
@@ -142,7 +148,14 @@ const Cart = () => {
                               min: 1,
                               style: { textAlign: "center" },
                             }}
-                            sx={{ width: 60, mx: 1 }}
+                            sx={{
+                              width: 60,
+                              mx: 1,
+                              border: "1px solid #ddd",
+                              borderRadius: 1,
+                              transition: "all 0.3s",
+                              "&:focus": { borderColor: "#3f51b5" },
+                            }}
                           />
 
                           <IconButton
@@ -157,7 +170,7 @@ const Cart = () => {
                       </Grid>
 
                       <Grid item xs={4} sm={2} sx={{ textAlign: "right" }}>
-                        <Typography variant="subtitle1">
+                        <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
                           ${(item.price * item.quantity).toFixed(2)}
                         </Typography>
                       </Grid>
@@ -180,17 +193,36 @@ const Cart = () => {
                     display: "flex",
                     justifyContent: "space-between",
                     mt: 2,
+                    gap: 2,
                   }}
                 >
                   <Button
                     variant="outlined"
                     color="error"
                     onClick={handleClearCart}
+                    sx={{
+                      borderRadius: "30px",
+                      "&:hover": {
+                        backgroundColor: "#f8d7da",
+                        borderColor: "#f5c6cb",
+                      },
+                    }}
                   >
                     Clear Cart
                   </Button>
 
-                  <Button variant="outlined" component={Link} to="/products">
+                  <Button
+                    variant="outlined"
+                    component={Link}
+                    to="/products"
+                    sx={{
+                      borderRadius: "30px",
+                      "&:hover": {
+                        backgroundColor: "#e0f7fa",
+                        borderColor: "#80deea",
+                      },
+                    }}
+                  >
                     Continue Shopping
                   </Button>
                 </Box>
@@ -198,61 +230,31 @@ const Cart = () => {
             </Grid>
 
             <Grid item xs={12} md={4}>
-              <Paper elevation={2} sx={{ p: 3 }}>
+              <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
                 <Typography variant="h6" gutterBottom>
                   Order Summary
                 </Typography>
 
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    mb: 1,
-                  }}
-                >
-                  <Typography variant="body1">
-                    Subtotal ({totalQuantity} items)
-                  </Typography>
-                  <Typography variant="body1">
-                    ${totalAmount.toFixed(2)}
-                  </Typography>
+                <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
+                  <Typography variant="body1">Subtotal ({totalQuantity} items)</Typography>
+                  <Typography variant="body1">${totalAmount.toFixed(2)}</Typography>
                 </Box>
 
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    mb: 1,
-                  }}
-                >
+                <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
                   <Typography variant="body1">Shipping</Typography>
                   <Typography variant="body1">$0.00</Typography>
                 </Box>
 
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    mb: 1,
-                  }}
-                >
+                <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
                   <Typography variant="body1">Tax</Typography>
                   <Typography variant="body1">$0.00</Typography>
                 </Box>
 
                 <Divider sx={{ my: 2 }} />
 
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    mb: 3,
-                  }}
-                >
+                <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
                   <Typography variant="h6">Total</Typography>
-                  <Typography variant="h6">
-                    ${totalAmount.toFixed(2)}
-                  </Typography>
+                  <Typography variant="h6">${totalAmount.toFixed(2)}</Typography>
                 </Box>
 
                 <Button
@@ -260,6 +262,12 @@ const Cart = () => {
                   color="primary"
                   fullWidth
                   size="large"
+                  sx={{
+                    background: "linear-gradient(45deg, #3f51b5, #2196f3)",
+                    "&:hover": {
+                      background: "linear-gradient(45deg, #2196f3, #3f51b5)",
+                    },
+                  }}
                 >
                   Checkout
                 </Button>
